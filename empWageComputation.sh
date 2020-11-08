@@ -7,6 +7,7 @@ echo Welcome to the Employee Wage Management Program
 part_time_hour=6
 full_time_hour=8
 wage_per_hour=20
+working_days_per_month=20
 #33% Chance that employee is absent
 ((attendance=RANDOM%3))
 #25% Chance that employee is part time
@@ -28,6 +29,7 @@ case $individual_employee_config in
 	echo Employee is works Part Time
 	((employee_wage=$part_time_hour*$wage_per_hour))
 	echo Wage for $(date +'%d-%m-%y') is $employee_wage
+	echo Monthly wage is $(($employee_wage*$working_days_per_month))
 	;;
 
 	#all other cases employee is Present and working full time
@@ -36,5 +38,7 @@ case $individual_employee_config in
         echo Employee works Full Time
         ((employee_wage=$full_time_hour*$wage_per_hour))
         echo Wage for $(date +'%d-%m-%y') is Rs.$employee_wage
+	echo Monthly wage is $(($employee_wage*$working_days_per_month))
 	;;
 esac
+
