@@ -31,6 +31,7 @@ wage_per_hour=20
 ((employee_type=RANDOM%4))
 days_attended=0
 total_hours=0
+declare -A wages_log
 
 #Calculate Days attended and hours worked
 for working_day in {1..21}
@@ -43,6 +44,7 @@ do
                 echo Employee Attended $days_attended Days and worked $total_hours hours in them
                 echo Make monthly payment of $monthly_wage
                 echo Employee has reached limit of working this month
+		wages_log[Total_Wage]=$monthly_wage
                 break;
         elif [ $working_day -eq 21 ]
         then
@@ -82,4 +84,11 @@ do
 	((daily_wage=$todays_hours*$wage_per_hour))
 	echo Wage for Day $working_day is Rs. $daily_wage
 
+	if [ $working_day -lt 21 ]
+	then
+		wages_log[Day_$working_day]=$daily_wage
+	fi
 done
+
+echo ${!wages_log[@]}
+echo ${wages_log[@]}
