@@ -86,9 +86,14 @@ do
 
 	if [ $working_day -lt 21 ]
 	then
-		wages_log[Day_$working_day]=$daily_wage
+		day_string=$(date -d +"${working_day} days" +'%d-%m-%y-%A')
+		key=${working_day}_${day_string}
+		wages_log[Day_$key]=$daily_wage
 	fi
 done
 
-echo ${!wages_log[@]}
-echo ${wages_log[@]}
+
+for log_key in ${!wages_log[@]}
+do
+	echo Log Key : $log_key --- Wage ${wages_log[$log_key]}
+done
